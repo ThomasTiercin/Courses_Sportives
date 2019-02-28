@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Tp_CoursesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="255" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="VilleID" Type="int" />
+    <Property Name="Organisateur" Type="int" />
+    <Property Name="SportID" Type="int" />
+  </EntityType>
+  <EntityType Name="Inscription">
+    <Key>
+      <PropertyRef Name="UtilisateurID" />
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="UtilisateurID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Libelle" Type="varchar" MaxLength="255" />
+    <Property Name="PositionID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="Longitude" Type="float" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Latitude" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Sport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Libelle" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="255" />
+    <Property Name="Prenom" Type="varchar" MaxLength="255" />
+    <Property Name="Login" Type="varchar" MaxLength="255" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="Role" Type="int" />
+    <Property Name="VilleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Ville">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="255" />
+    <Property Name="CodePostal" Type="int" />
+  </EntityType>
+  <Association Name="FK__Course__Organisa__1BFD2C07">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="Organisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__Organisa__1CF15040">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="Organisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__SportID__1DE57479">
+    <End Role="Sport" Type="Self.Sport" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="SportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__VilleID__1ED998B2">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="VilleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__VilleID__1FCDBCEB">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="VilleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripti__Cours__20C1E124">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Inscription" Type="Self.Inscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inscription">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripti__Utili__21B6055D">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+    <End Role="Inscription" Type="Self.Inscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inscription">
+        <PropertyRef Name="UtilisateurID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POI__CourseID__22AA2996">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="POI" Type="Self.POI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="POI">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POI__PositionID__239E4DCF">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="POI" Type="Self.POI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="POI">
+        <PropertyRef Name="PositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Utilisate__Ville__24927208">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Utilisateur">
+        <PropertyRef Name="VilleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Utilisate__Ville__25869641">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Utilisateur">
+        <PropertyRef Name="VilleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Tp_CoursesModelStoreContainer">
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inscription" EntityType="Self.Inscription" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POI" EntityType="Self.POI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sport" EntityType="Self.Sport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ville" EntityType="Self.Ville" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Course__Organisa__1BFD2C07" Association="Self.FK__Course__Organisa__1BFD2C07">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__Organisa__1CF15040" Association="Self.FK__Course__Organisa__1CF15040">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__SportID__1DE57479" Association="Self.FK__Course__SportID__1DE57479">
+      <End Role="Sport" EntitySet="Sport" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__VilleID__1ED998B2" Association="Self.FK__Course__VilleID__1ED998B2">
+      <End Role="Ville" EntitySet="Ville" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__VilleID__1FCDBCEB" Association="Self.FK__Course__VilleID__1FCDBCEB">
+      <End Role="Ville" EntitySet="Ville" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripti__Cours__20C1E124" Association="Self.FK__Inscripti__Cours__20C1E124">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Inscription" EntitySet="Inscription" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripti__Utili__21B6055D" Association="Self.FK__Inscripti__Utili__21B6055D">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Inscription" EntitySet="Inscription" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POI__CourseID__22AA2996" Association="Self.FK__POI__CourseID__22AA2996">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="POI" EntitySet="POI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POI__PositionID__239E4DCF" Association="Self.FK__POI__PositionID__239E4DCF">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="POI" EntitySet="POI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Utilisate__Ville__24927208" Association="Self.FK__Utilisate__Ville__24927208">
+      <End Role="Ville" EntitySet="Ville" />
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Utilisate__Ville__25869641" Association="Self.FK__Utilisate__Ville__25869641">
+      <End Role="Ville" EntitySet="Ville" />
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

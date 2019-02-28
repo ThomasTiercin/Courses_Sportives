@@ -1,0 +1,10 @@
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\CourseLibrary.dll.config
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\CourseLibrary.dll
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\CourseLibrary.pdb
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\EntityFramework.dll
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\EntityFramework.xml
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\obj\Debug\CourseLibrary.csprojResolveAssemblyReference.cache
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\obj\Debug\CourseLibrary.dll
+C:\Users\ttiercin2017\Desktop\Projet\Course\CourseLibrary\obj\Debug\CourseLibrary.pdb

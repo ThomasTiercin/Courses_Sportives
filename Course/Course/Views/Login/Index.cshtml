@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Email : </label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="Login" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Password : </label>
+            </div>
+            <div class="col-md-10">
+                <input type="password" name="Password" />
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <input type="submit" value="login" />
+
+        </div>
+    </div>
+}
+
+

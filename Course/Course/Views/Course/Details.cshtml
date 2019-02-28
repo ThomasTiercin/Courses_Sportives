@@ -1,0 +1,142 @@
+﻿@model CourseLibrary.Course
+
+@{
+    List<CourseLibrary.Utilisateur> listParticipant = ViewBag.ListParticipant;
+    CourseLibrary.Course course = ViewBag.Course;
+    List<CourseLibrary.POI> listPOI = ViewBag.Course.POI;
+    ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+<!-- Card -->
+<div class="card card-cascade wider reverse">
+
+    <!-- Card image -->
+        <div id='mapid' style='height: 380px;'></div>
+
+    <!-- Card content -->
+    <div class="card-body card-body-cascade text-center">
+
+        <!-- Title -->
+        <h4 class="card-title"><strong>@Html.DisplayFor(model => course.Nom)</strong></h4>
+        <!-- Subtitle -->
+        <h6 class="font-weight-bold indigo-text py-2">@Html.DisplayFor(model => course.Date)</h6>
+
+        <!-- Text -->
+        <p class="card-text">La course se situe à @Html.DisplayFor(model => course.Ville.Nom), est organisé par 
+         @Html.DisplayFor(model => course.Utilisateur.Nom). Il s'agit d'une course de @Html.DisplayFor(model => course.Sport.Libelle)</p>
+
+            <!-- Linkedin -->
+            <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
+            <!-- Twitter -->
+            <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+            <!-- Dribbble -->
+            <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
+
+     </div>
+
+</div><br />
+<!-- Card -->
+
+<div class="card card-cascade wider reverse">
+    
+    <!-- Card content -->
+    <div class="card-body card-body-cascade text-center">
+
+        <!-- Title -->
+        <h4 class="card-title"><strong>Liste des participants</strong></h4>
+
+        <!-- Text -->
+        <p class="card-text">
+            <table class="table">
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Prenom
+                    </th>
+                </tr>
+
+                @foreach (var item in listParticipant)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prenom)
+                        </td>
+                    </tr>
+                }
+
+            </table>    
+        </p>
+    </div>
+</div>
+        
+        <link rel='stylesheet' href='https://unpkg.com/leaflet@1.4.0/dist/leaflet.css' integrity='sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==' crossorigin='' />
+        <script src='https://unpkg.com/leaflet@1.4.0/dist/leaflet.js' integrity='sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==' crossorigin=''></script>
+
+        <script>
+            var mymap = L.map('mapid').setView([46.5, 2], 5);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiYXhlbGxlZmV2cmUxNCIsImEiOiJjanMzMmQ5ZDYwczZ4NDNrdmlxOXI5cnJwIn0.R9GWUwTVAZuQJEmfd3PzNA'
+            }).addTo(mymap);
+
+            var points = [
+                @foreach (var tracer in listPOI)
+        {
+            @:['@tracer.Libelle', '@tracer.Latitude.ToString().Replace(",", ".")', '@tracer.Longitude.ToString().Replace(",", ".")'],
+                }
+            ];
+            var line = [
+                @foreach (var tracer in listPOI)
+        {
+             @:['@tracer.Latitude.ToString().Replace(",", ".")', '@tracer.Longitude.ToString().Replace(",", ".")'],
+                }
+            ];
+
+            var polyline = L.polyline(line, { color: '#4285f4' }).addTo(mymap);
+            mymap.fitBounds(polyline.getBounds());
+
+
+            var greenIcon = L.icon({
+                iconUrl: 'https://image.flaticon.com/icons/svg/1244/1244505.svg',
+                iconSize: [35, 35], // size of the icon
+                shadowSize: [50, 64], // size of the shadow
+                shadowAnchor: [4, 62],  // the same for the shadow
+            });
+
+            var stepIcon = L.icon({
+                iconUrl: 'https://image.flaticon.com/icons/svg/1244/1244512.svg',
+                iconSize: [35, 35], // size of the icon
+                shadowSize: [50, 64], // size of the shadow
+                shadowAnchor: [4, 62],  // the same for the shadow
+            });
+
+            var finishIcon = L.icon({
+                iconUrl: 'https://image.flaticon.com/icons/svg/1244/1244489.svg',
+                iconSize: [35, 35], // size of the icon
+                shadowSize: [50, 64], // size of the shadow
+                shadowAnchor: [4, 62],  // the same for the shadow
+            });
+
+
+            for (var i = 0; i < points.length; i++) {
+                if (i == 0) {
+                    marker = new L.marker([parseFloat(points[i][1]), parseFloat(points[i][2])], { icon: greenIcon }).bindPopup(points[i][0]).addTo(mymap);
+                } else if (i == points.length - 1) {
+                    marker = new L.marker([parseFloat(points[i][1]), parseFloat(points[i][2])], { icon: finishIcon }).bindPopup(points[i][0]).addTo(mymap);
+                } else {
+                    marker = new L.marker([parseFloat(points[i][1]), parseFloat(points[i][2])], { icon: stepIcon }).bindPopup(points[i][0]).addTo(mymap);
+                }
+            }
+
+
+        </script>
+
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>

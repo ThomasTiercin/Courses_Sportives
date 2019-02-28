@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="25c58d8d7b3c4821b7ddc16b1e82afb5" Name="Diagram1">
+        <EntityTypeShape EntityType="Tp_CoursesModel.Course" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tp_CoursesModel.POI" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tp_CoursesModel.Position" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tp_CoursesModel.Sport" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tp_CoursesModel.Utilisateur" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tp_CoursesModel.Ville" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Course__Organisa__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Course__Organisa__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Course__SportID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Course__VilleID__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Course__VilleID__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__POI__CourseID__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__POI__PositionID__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Utilisate__Ville__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.FK__Utilisate__Ville__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="Tp_CoursesModel.Inscription" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
