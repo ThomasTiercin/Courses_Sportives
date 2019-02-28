@@ -32,7 +32,7 @@ namespace Course.Controllers
         public ActionResult Edit(int id)
         {
             Sport unSport = _dataLayer.getById(id);
-            return this.View();
+            return this.View(unSport);
         }
         [HttpPost]
         public ActionResult Edit(Sport sport)

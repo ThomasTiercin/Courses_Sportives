@@ -44,7 +44,7 @@ namespace Course.Controllers
             this.ViewBag.ListVille = _dataLayerVille.getAll();
             this.ViewBag.ListOrganisateur = _dataLayerOrganisateur.getAll();
             this.ViewBag.ListSport = _dataLayerSport.getAll();
-            return this.View();
+            return this.View(uneCourse);
         }
         [HttpPost]
         public ActionResult Edit(CourseLibrary.Course course)

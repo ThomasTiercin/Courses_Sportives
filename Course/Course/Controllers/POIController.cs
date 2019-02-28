@@ -41,7 +41,7 @@ namespace Course.Controllers
             POI unPOI = _dataLayer.getById(id);
             this.ViewBag.ListPosition = _dataLayerPosition.getAll();
             this.ViewBag.ListCourse = _dataLayerCourse.getAll();
-            return this.View();
+            return this.View(unPOI);
         }
         [HttpPost]
         public ActionResult Edit(POI poi)

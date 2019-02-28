@@ -32,7 +32,7 @@ namespace Course.Controllers
         public ActionResult Edit(int id)
         {
             Ville uneVille = _dataLayer.getById(id);
-            return this.View();
+            return this.View(uneVille);
         }
         [HttpPost]
         public ActionResult Edit(Ville ville)

@@ -32,7 +32,7 @@ namespace Course.Controllers
         public ActionResult Edit(int id)
         {
             Utilisateur unUtilisateur = _dataLayer.getById(id);
-            return this.View();
+            return this.View(unUtilisateur);
         }
         [HttpPost]
         public ActionResult Edit(Utilisateur utilisateur)
